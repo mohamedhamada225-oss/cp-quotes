@@ -1,5 +1,5 @@
 /* Service worker: network-first with cache fallback, so the last downloaded version works offline. */
-const CACHE_NAME = 'cpq-V6-20261120074740';
+const CACHE_NAME = 'cpq-V6.1-a-20261120075057';
 const CORE = ['./', 'index.html', 'version.json', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 const NET_TIMEOUT_MS = 6000;
 
@@ -9,6 +9,10 @@ self.addEventListener('install', (event) => {
       .then((c) => Promise.all(CORE.map((u) => fetch(new Request(u, { cache: 'reload' })).then((r) => r.ok && c.put(u, r)).catch(() => {}))))
       .then(() => self.skipWaiting())
   );
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {

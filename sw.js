@@ -1,5 +1,5 @@
 /* Service worker: network-first with cache fallback, so the last downloaded version works offline. */
-const CACHE_NAME = 'cpq-V5-20261120072104';
+const CACHE_NAME = 'cpq-V5-20261120072229';
 const CORE = ['./', 'index.html', 'version.json', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 const NET_TIMEOUT_MS = 6000;
 
@@ -35,7 +35,7 @@ self.addEventListener('fetch', (event) => {
     const cache = await caches.open(CACHE_NAME);
     try {
       const resp = await fromNetwork(req);
-      if (resp && resp.ok) {
+      if (resp && resp.ok && !url.search.includes('_=')) {
         const key = req.mode === 'navigate' ? 'index.html' : req;
         cache.put(key, resp.clone());
         if (req.mode === 'navigate') cache.put('./', resp.clone());

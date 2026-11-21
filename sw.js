@@ -1,5 +1,5 @@
 /* Service worker: network-first with cache fallback, so the last downloaded version works offline. */
-const CACHE_NAME = 'cpq-V6.8-20261121061000';
+const CACHE_NAME = 'cpq-V6.9-20261121082618';
 const CORE = ['./', 'index.html', 'version.json', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 const NET_TIMEOUT_MS = 6000;
 
